@@ -22,9 +22,9 @@ public class WaitForDemoTest {
 
     // Given a simple producer/consumer system
     final BlockingQueue<String> queue = new ArrayBlockingQueue<String>(5);
-    final Producer producer1 = Producer.prepare(10).messages().pausing(seconds(1)).publishingTo(queue).withBody("Producer1");
-    final Producer producer2 = Producer.prepare(10).messages().pausing(seconds(1)).publishingTo(queue).withBody("Producer2");
-    final Consumer consumer = Consumer.consumerOf(queue).interestedInMessagesContaining("2");
+    final Producer producer1 = Producer.publishingTo(queue).withBody("Producer1").send(10).messages().pausing(seconds(1)).build();
+    final Producer producer2 = Producer.publishingTo(queue).withBody("Producer2").send(10).messages().pausing(seconds(1)).build();
+    final Consumer consumer = Consumer.consumerOf(queue).interestedInMessagesContaining("2").build();
 
     // When the system is started
     producer1.go();
