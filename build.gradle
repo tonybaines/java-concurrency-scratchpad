@@ -1,6 +1,12 @@
 apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
 
 dependencies {
     compile 'com.google.code.tempus-fugit:tempus-fugit:1.1'
     testCompile 'junit:junit:4.9'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.6'
 }
